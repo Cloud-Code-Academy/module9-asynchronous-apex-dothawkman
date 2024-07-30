@@ -27,9 +27,30 @@ public with sharing class NextStepFuture {
      * Opportunity Next Step field is a standard field
      * Update the corresponding test class AsynchronousTest and test method nextStepFuture_testUpdateAllNextStep to cover test this method
      */
-    //[public | private ] [static] data_type method_name (input parameters) {
-    //  The body of the method
-    //}
+
+     @future
+    public static void nextStepFuture_testUpdateAllNextStep() {
+        List<Account> accounts = [SELECT Id, Next_Step__c  FROM Account];
+        List<Opportunity> opportunities = [SELECT Id, NextStep FROM Opportunity];
+
+      for (Account acc : accounts) {
+            acc.Next_Step__c = 'Meeting in the future';
+      }
+      try {
+        update accounts;
+      } catch (DmlException e) {
+        System.debug('Account Update Error: ' + e.getMessage());
+      }
+      for (Opportunity opp : opportunities){
+         opp.NextStep = 'Meeting in the future';
+      }
+      try {
+        update opportunities;
+      } catch (DmlException e) {
+        System.debug('Oppty Update Error: ' + e.getMessage());
+      }
+      
+    }
 
     /*
     * Question 2
@@ -37,11 +58,17 @@ public with sharing class NextStepFuture {
     * Create a method that inserts a big deal opportunity and updates the user role name to 'CRO'
     * Update the corresponding test class AsynchronousTest and test method nextStepFuture_testCreateDealAndUpdateRole to cover test this method
     */
+
     //Mix DML Error happens when you try to perform DML operations on setup and non-setup objects in a single transaction.
     public static void createDealAndUpdateRole() {
         Opportunity bigDeal = new Opportunity();
         insertBigDeal(bigDeal);
+        updateUserROle();
+     
+    }
 
+    @future
+    private static void updateUserRole() {
         UserRole[] roles = [SELECT Id, Name FROM UserRole WHERE Id = :UserInfo.getUserRoleId() OR Name = 'CRO' LIMIT 1];
         updateUserRoleName(roles);
     }
