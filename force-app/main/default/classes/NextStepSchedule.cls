@@ -27,7 +27,7 @@ public with sharing class NextStepSchedule implements Schedulable {
      * Configure and schedule the job using the Apex Scheduler in Salesforce Setup
      * Code to execute the batch job should not need to change other than uncommenting the code
      */
-    public void execute (SchedulableContext SC) {
+    public void execute (SchedulableContext sc) {
         NextStepBatch batch = new NextStepBatch(); 
         Database.executeBatch(batch);
     }
