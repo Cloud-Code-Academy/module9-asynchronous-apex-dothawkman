@@ -63,7 +63,7 @@ public with sharing class NextStepFuture {
     public static void createDealAndUpdateRole() {
         Opportunity bigDeal = new Opportunity();
         insertBigDeal(bigDeal);
-        updateUserROle();
+        updateUserRole();
      
     }
 
