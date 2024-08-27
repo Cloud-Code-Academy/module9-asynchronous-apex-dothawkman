@@ -59,7 +59,7 @@ public with sharing class NextStepQueueable implements Queueable {
         for (Account acc : this.accounts.values()) {
             removeNextStep(acc);
         }
-        Update this.accounts.values();
+        update this.accounts.values();
 
         // Get the opportunities related to the accounts
         // Remove the Next Step using the helper method
