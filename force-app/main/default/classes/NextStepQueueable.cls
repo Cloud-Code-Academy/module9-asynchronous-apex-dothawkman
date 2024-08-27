@@ -35,7 +35,7 @@ public with sharing class NextStepQueueable implements Queueable {
         // Get 10 accounts with Next Step populated
         // If there are no accounts, exit the method
          // If there are any accounts, queue the job using System.enqueueJob
-        Map<Id, Account> accMap = new Map<id, Account>(
+        Map<Id, Account> accMap = new Map<Id, Account>(
             [SELECT Id, Next_Step__c         
             FROM Account 
             WHERE Next_Step__c!= null 
